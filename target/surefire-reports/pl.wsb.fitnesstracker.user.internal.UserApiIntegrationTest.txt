@@ -1,0 +1,84 @@
+-------------------------------------------------------------------------------
+Test set: pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 1.867 s <<< FAILURE! -- in pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllSimpleUsers_whenGettingAllUsers -- Time elapsed: 0.018 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllSimpleUsers_whenGettingAllUsers(UserApiIntegrationTest.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldPersistUser_whenCreatingUser -- Time elapsed: 1.632 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<200>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldPersistUser_whenCreatingUser(UserApiIntegrationTest.java:165)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserByEmail -- Time elapsed: 0.013 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserByEmail(UserApiIntegrationTest.java:100)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserById -- Time elapsed: 0.016 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserById(UserApiIntegrationTest.java:85)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldUpdateUser_whenUpdatingUser -- Time elapsed: 0.073 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: "Mike"
+ but was: "f5eda59a-8eff-4660-8454-389482ffa20e"
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldUpdateUser_whenUpdatingUser(UserApiIntegrationTest.java:208)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllUsersOlderThan_whenGettingAllUsersOlderThan -- Time elapsed: 0.014 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllUsersOlderThan_whenGettingAllUsersOlderThan(UserApiIntegrationTest.java:114)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldRemoveUserFromRepository_whenDeletingClient -- Time elapsed: 0.015 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<204> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at pl.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldRemoveUserFromRepository_whenDeletingClient(UserApiIntegrationTest.java:131)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
