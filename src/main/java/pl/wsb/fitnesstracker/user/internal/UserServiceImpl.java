@@ -12,6 +12,7 @@ import pl.wsb.fitnesstracker.user.api.UserService;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,7 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User createUser(final User user) {
@@ -61,5 +63,18 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findUsersOlderThan(@JsonFormat(pattern = "yyyy-MM-dd") final LocalDate olderThan) {
         return userRepository.findOlderThan(olderThan);
+    }
+
+    @Override
+    public Optional<User> updateUser(final Long id, final User userToUpdate){
+        User user = userRepository.findById(id).orElse(null);
+
+        user.setId(id);
+        user.setFirstName(userToUpdate.getFirstName());
+        user.setLastName(userToUpdate.getLastName());
+        user.setEmail(userToUpdate.getEmail());
+        user.setBirthdate(userToUpdate.getBirthdate());
+
+        return Optional.of(userRepository.save(user));
     }
 }

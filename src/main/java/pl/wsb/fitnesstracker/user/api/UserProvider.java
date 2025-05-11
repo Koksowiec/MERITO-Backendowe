@@ -34,4 +34,6 @@ public interface UserProvider {
     List<User> findAllUsers();
 
     List<User> findUsersOlderThan(@JsonFormat(pattern = "yyyy-MM-dd") final LocalDate olderThan);
+
+    Optional<User> updateUser(final Long id, final User userDto);
 }

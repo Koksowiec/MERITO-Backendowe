@@ -79,4 +79,11 @@ class UserController {
                 .map(userMapper::toSimpleBirthdate)
                 .toList();
     }
+
+    @PutMapping("/{id}")
+    public UserDto updateUser(@PathVariable long id, @RequestBody UserDto userDto) throws InterruptedException {
+        return userService.updateUser(id, userMapper.toEntity(userDto))
+                .map(userMapper::toDto)
+                .orElse(null);
+    }
 }
