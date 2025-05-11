@@ -41,4 +41,21 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    @Override
+    public boolean deleteUser(final int id){
+        log.info("Deleting User {}", user);
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("User with given ID doesn't exist!");
+        }
+
+        try {
+            userRepository.deleteById(id);
+        }
+        catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
 }
