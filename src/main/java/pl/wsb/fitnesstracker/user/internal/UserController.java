@@ -2,6 +2,7 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,8 +54,19 @@ class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable long id) {
+        // http://localhost:2101/v1/users/1
         // Ta metoda obecnie zwraca błąd związany z kluczem obcym do encji Training.
         // Wymagania obecnie nie doprezycowały czy usunąć też kaskadowo inne encje:
         return userService.deleteUserById(id);
+    }
+
+    @GetMapping("/email")
+    public List<UserSimpleEmail> getUserByEmail(@RequestParam String email) throws InterruptedException {
+        // http://localhost:2101/v1/users/email?email=Emma.Johnson
+
+        return userService.getUserByEmail(email)
+                .stream()
+                .map(userMapper::toSimpleEmail)
+                .toList();
     }
 }
