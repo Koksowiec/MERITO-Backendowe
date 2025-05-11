@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * All the methods inside are described within inherited classes.
+ */
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -48,16 +52,13 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public boolean deleteUserById(final Long id){
-        try {
-            userRepository.deleteById(id);
-        }
-        catch (Exception e) {
-            log.error(e.getMessage());
-            return false;
+    public void deleteUserById(final Long id){
+        if (userRepository.findById(id).orElse(null) == null)
+        {
+            throw new IllegalArgumentException("User with given id " + id + " does not exist!");
         }
 
-        return true;
+        userRepository.deleteById(id);
     }
 
     @Override

@@ -33,7 +33,11 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
+    /**
+     * Find users older than given time.
+     *
+     * @param olderThan specify the time to find users born before this date
+     * @return {@link List} of {@link User}
+     */
     List<User> findUsersOlderThan(@JsonFormat(pattern = "yyyy-MM-dd") final LocalDate olderThan);
-
-    Optional<User> updateUser(final Long id, final User userDto);
 }

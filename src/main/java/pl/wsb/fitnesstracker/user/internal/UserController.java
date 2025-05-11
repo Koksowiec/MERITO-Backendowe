@@ -18,6 +18,11 @@ class UserController {
 
     private final UserMapper userMapper;
 
+    /**
+     * Gets all users from database.
+     *
+     * @return {@link List} of found {@link UserDto}
+     */
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
@@ -26,12 +31,24 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Creates user based on request body and inserts it inside database.
+     *
+     * @param userDto json object of user to create
+     * @return {@link UserDto} that was added
+     * @throws InterruptedException
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
         return userMapper.toDto(userService.createUser(userMapper.toEntity(userDto)));
     }
 
+    /**
+     * Gets simplified version of users object from database.
+     *
+     * @return {@link List} of {@link UserSimple}
+     */
     @GetMapping("/simple")
     public List<UserSimple> getAllUsersSimple(){
         // TODO: Zad 1 - pamietaj o test driven developement, nie edytuj testow integracfyjnych,
@@ -46,6 +63,13 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Gets user by given id.
+     *
+     * @param id to specify user to get
+     * @return {@link UserDto} that was specified by id
+     * @throws InterruptedException
+     */
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable long id) throws InterruptedException {
         return userService.getUser(id)
@@ -53,15 +77,28 @@ class UserController {
                 .orElse(null);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    /**
+     * Deletes user by given id.
+     *
+     * @param id to specify user to delete.
+     * @return 204 status or throw an exception
+     */
     @DeleteMapping("/{id}")
-    public boolean deleteUser(@PathVariable long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable long id) throws InterruptedException {
         // http://localhost:2101/v1/users/1
-        // Ta metoda obecnie zwraca błąd związany z kluczem obcym do encji Training.
-        // Wymagania obecnie nie doprezycowały czy usunąć też kaskadowo inne encje:
-        return userService.deleteUserById(id);
+
+        userService.deleteUserById(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User deleted");
     }
 
+    /**
+     * Gets users whose email contains request param.
+     *
+     * @param email to specify users to get
+     * @return {@link List} of {@link UserSimpleEmail}
+     * @throws InterruptedException
+     */
     @GetMapping("/email")
     public List<UserSimpleEmail> getUserByEmail(@RequestParam String email) throws InterruptedException {
         // http://localhost:2101/v1/users/email?email=Emma.Johnson
@@ -72,6 +109,13 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Gets users that were born before given date.
+     *
+     * @param time to specify what users to get
+     * @return {@link List} of {@link UserSimpleBirthdate}
+     * @throws InterruptedException
+     */
     @GetMapping("/older/{time}")
     public List<UserSimpleBirthdate> getUsersOlderThan(@PathVariable @JsonFormat(pattern = "yyyy-MM-dd") LocalDate time) throws InterruptedException {
         return userService.findUsersOlderThan(time)
@@ -80,6 +124,14 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Updates user by given id and user details provided in request body.
+     *
+     * @param id to specify what user to update
+     * @param userDto to specify update parameters
+     * @return {@link UserDto}
+     * @throws InterruptedException
+     */
     @PutMapping("/{id}")
     public UserDto updateUser(@PathVariable long id, @RequestBody UserDto userDto) throws InterruptedException {
         return userService.updateUser(id, userMapper.toEntity(userDto))

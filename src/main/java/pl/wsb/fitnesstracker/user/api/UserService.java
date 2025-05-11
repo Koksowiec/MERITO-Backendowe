@@ -1,9 +1,5 @@
 package pl.wsb.fitnesstracker.user.api;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,7 +8,27 @@ import java.util.Optional;
  */
 public interface UserService {
 
+    /**
+     * Create user.
+     *
+     * @param user entity to update
+     * @return {@link User} created entity
+     */
     User createUser(User user);
 
-    boolean deleteUserById(final Long id);
+    /**
+     * Delete user by provided id.
+     *
+     * @param id to specify what user to delete.
+     */
+    void deleteUserById(final Long id);
+
+    /**
+     * Updates user by id and user details.
+     *
+     * @param id to specify what user to update
+     * @param userDto to specif user details
+     * @return {@link Optional} of {@link User}
+     */
+    Optional<User> updateUser(final Long id, final User userDto);
 }

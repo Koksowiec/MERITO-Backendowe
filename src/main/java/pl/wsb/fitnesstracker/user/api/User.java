@@ -3,8 +3,11 @@ package pl.wsb.fitnesstracker.user.api;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+import pl.wsb.fitnesstracker.training.api.Training;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +33,9 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Training> trainings = new ArrayList<>();
 
     public User(
             final String firstName,
