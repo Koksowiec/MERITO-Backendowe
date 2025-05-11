@@ -50,9 +50,11 @@ class UserController {
                 .orElse(null);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable long id) {
-        // TODO: dodaj komentarze
-        boolean result = userService.deleteUser(); // dokoncz
+    public boolean deleteUser(@PathVariable long id) {
+        // Ta metoda obecnie zwraca błąd związany z kluczem obcym do encji Training.
+        // Wymagania obecnie nie doprezycowały czy usunąć też kaskadowo inne encje:
+        return userService.deleteUserById(id);
     }
 }

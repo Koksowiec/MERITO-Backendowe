@@ -8,5 +8,5 @@ public interface UserService {
 
     User createUser(User user);
 
-    boolean deleteUser(final User user);
+    boolean deleteUserById(final Long id);
 }

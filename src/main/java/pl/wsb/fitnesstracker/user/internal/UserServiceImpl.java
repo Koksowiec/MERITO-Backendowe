@@ -42,12 +42,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public boolean deleteUser(final int id){
-        log.info("Deleting User {}", user);
-        if (user.getId() == null) {
-            throw new IllegalArgumentException("User with given ID doesn't exist!");
-        }
-
+    public boolean deleteUserById(final Long id){
         try {
             userRepository.deleteById(id);
         }
