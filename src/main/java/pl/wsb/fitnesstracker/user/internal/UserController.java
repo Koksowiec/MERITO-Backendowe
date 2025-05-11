@@ -1,10 +1,12 @@
 package pl.wsb.fitnesstracker.user.internal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -67,6 +69,14 @@ class UserController {
         return userService.getUserByEmail(email)
                 .stream()
                 .map(userMapper::toSimpleEmail)
+                .toList();
+    }
+
+    @GetMapping("/older/{time}")
+    public List<UserSimpleBirthdate> getUsersOlderThan(@PathVariable @JsonFormat(pattern = "yyyy-MM-dd") LocalDate time) throws InterruptedException {
+        return userService.findUsersOlderThan(time)
+                .stream()
+                .map(userMapper::toSimpleBirthdate)
                 .toList();
     }
 }

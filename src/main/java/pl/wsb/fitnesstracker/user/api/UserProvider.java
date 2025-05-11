@@ -1,5 +1,8 @@
 package pl.wsb.fitnesstracker.user.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,4 +32,6 @@ public interface UserProvider {
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
+
+    List<User> findUsersOlderThan(@JsonFormat(pattern = "yyyy-MM-dd") final LocalDate olderThan);
 }

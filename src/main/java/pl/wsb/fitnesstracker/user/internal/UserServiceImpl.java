@@ -1,5 +1,7 @@
 package pl.wsb.fitnesstracker.user.internal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,8 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +56,10 @@ class UserServiceImpl implements UserService, UserProvider {
         }
 
         return true;
+    }
+
+    @Override
+    public List<User> findUsersOlderThan(@JsonFormat(pattern = "yyyy-MM-dd") final LocalDate olderThan) {
+        return userRepository.findOlderThan(olderThan);
     }
 }
