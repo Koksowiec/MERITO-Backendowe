@@ -51,12 +51,6 @@ class UserController {
      */
     @GetMapping("/simple")
     public List<UserSimple> getAllUsersSimple(){
-        // TODO: Zad 1 - pamietaj o test driven developement, nie edytuj testow integracfyjnych,
-        // Jesli testy przejda to znaczy ze zadanie jest poprawnmie wykonane
-        // Javadoc ogarnij z copilotem ale pamietaj zeby to analizowac czy na pewno jest poprawne
-        // Tworz na postmanie kolekcje z zaphytaniami i na koncu ja eksportujemy i dostajemy jsona,
-        // Nastepnie tego jsona dodajemy do resources jako dowod
-
         return userService.findAllUsers()
                 .stream()
                 .map(userMapper::toSimple)
@@ -85,10 +79,7 @@ class UserController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable long id) throws InterruptedException {
-        // http://localhost:2101/v1/users/1
-
         userService.deleteUserById(id);
-
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User deleted");
     }
 
@@ -101,8 +92,6 @@ class UserController {
      */
     @GetMapping("/email")
     public List<UserSimpleEmail> getUserByEmail(@RequestParam String email) throws InterruptedException {
-        // http://localhost:2101/v1/users/email?email=Emma.Johnson
-
         return userService.getUserByEmail(email)
                 .stream()
                 .map(userMapper::toSimpleEmail)

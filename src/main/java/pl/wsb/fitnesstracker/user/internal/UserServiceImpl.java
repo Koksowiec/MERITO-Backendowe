@@ -43,7 +43,8 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public Optional<User> getUserByEmail(final String email) {
-        return userRepository.findByEmail(email);
+        var test = userRepository.findByEmail(email);
+        return test;
     }
 
     @Override
