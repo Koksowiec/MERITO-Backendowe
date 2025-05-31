@@ -19,4 +19,35 @@ class MailProperties {
      */
     private final String from;
 
+    // TODO
+    private String host;
+
+    // TODO
+    private int port;
+
+    // TODO
+    private String username;
+
+    // TODO
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getFrom() {
+        return from;
+    }
 }

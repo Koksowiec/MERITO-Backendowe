@@ -4,20 +4,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Component
-public class EmailServiceImpl {
+public class EmailServiceImpl{
 
-    @Autowired
     private JavaMailSender emailSender;
 
-    public void sendSimpleMessage(
-            String to, String subject, String text) {
+    public EmailServiceImpl(JavaMailSender emailSender) {
+        this.emailSender = emailSender;
+    }
+
+    public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@baeldung.com");
+
+        message.setFrom("szczepanskikrzysztof074@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+
         emailSender.send(message);
     }
+
+    /* TODO: Kopiuj wklej do kontrolera aby wysyłać maile
+    private final EmailServiceImpl emailService;
+
+    @GetMapping("/email/send")
+    public String sentEmailTest(){
+        emailService.sendSimpleMessage("szczepanskikrzysiu@hotmail.com", "Test", "Test");
+
+        return "Email have been sent!";
+    }
+    */
 }

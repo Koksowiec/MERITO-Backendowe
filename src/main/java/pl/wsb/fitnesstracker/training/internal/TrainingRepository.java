@@ -11,11 +11,22 @@ import java.util.Objects;
 import java.util.Optional;
 
 interface TrainingRepository extends JpaRepository<Training, Long> {
-    default Optional<Training> getByUserId(final Long userId) {
+    default List<Training> getAll(){
+        return findAll();
+    }
+
+    default List<Training> getAllByActivityType(ActivityType activityType){
+        return findAll()
+                .stream()
+                .filter(training -> Objects.equals(training.getActivityType(), activityType))
+                .toList();
+    }
+
+    default List<Training> getByUserId(final Long userId) {
         return findAll()
                 .stream()
                 .filter(training -> Objects.equals(training.getUser().getId(), userId))
-                .findFirst();
+                .toList();
     }
 
     default List<Training> getFinishedTrainingsByDate(final Date afterDate) {

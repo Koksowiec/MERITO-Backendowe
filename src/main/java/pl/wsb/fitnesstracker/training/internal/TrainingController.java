@@ -2,14 +2,10 @@ package pl.wsb.fitnesstracker.training.internal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pl.wsb.fitnesstracker.mail.internal.EmailServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
 
-import java.time.LocalDate;
 import java.sql.Date;
 import java.util.List;
 
@@ -21,15 +17,29 @@ public class TrainingController {
     private final TrainingServiceImpl trainingService;
     private final TrainingMapper trainingMapper;
 
-    private final EmailServiceImpl emailService;
+    @GetMapping
+    public List<TrainingDto> getTrainings(){
+        return trainingService.getAllTrainings()
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/activityType")
+    public List<TrainingDto> getAllByActivityType(@RequestParam("activityType") String activityTypeString) throws InterruptedException{
+        ActivityType activityType = ActivityType.valueOf(activityTypeString.toUpperCase());
+        return trainingService.getAllTrainingsByActivityType(activityType)
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
 
     @GetMapping("/{userId}")
-    public TrainingDto getUserTrainings(@PathVariable long userId) throws InterruptedException {
-        emailService.sendSimpleMessage("asia.kolesinska@gmail.com", "Test", "Test");
-
-        return trainingService.getTraining(userId)
+    public List<TrainingDto> getUserTrainings(@PathVariable long userId) throws InterruptedException {
+        return trainingService.getTrainings(userId)
+                .stream()
                 .map(trainingMapper::toDto)
-                .orElse(null);
+                .toList();
     }
 
     @GetMapping("/finished/{afterTime}")
@@ -40,5 +50,11 @@ public class TrainingController {
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public TrainingDto createTraining(@RequestBody TrainingDto training) {
+        return trainingMapper.toDto(trainingService.createTraining(training));
     }
 }
