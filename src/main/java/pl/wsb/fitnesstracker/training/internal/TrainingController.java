@@ -4,7 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.training.api.CreateTrainingRequest;
+import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
+import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserProvider;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,6 +20,8 @@ public class TrainingController {
 
     private final TrainingServiceImpl trainingService;
     private final TrainingMapper trainingMapper;
+
+    private final UserProvider userProvider;
 
     @GetMapping
     public List<TrainingDto> getTrainings(){
@@ -54,7 +60,18 @@ public class TrainingController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public TrainingDto createTraining(@RequestBody TrainingDto training) {
-        return trainingMapper.toDto(trainingService.createTraining(training));
+    public TrainingDto createTraining(@RequestBody CreateTrainingRequest trainingRequest) throws InterruptedException {
+
+        var user = userProvider.getUser(trainingRequest.userId()).get();
+
+        Training trainingDto = new Training(
+                user,
+                trainingRequest.startTime(),
+                trainingRequest.endTime(),
+                trainingRequest.activityType(),
+                trainingRequest.distance(),
+                trainingRequest.averageSpeed());
+
+        return trainingMapper.toDto(trainingService.createTraining(trainingDto));
     }
 }

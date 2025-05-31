@@ -1,6 +1,7 @@
 package pl.wsb.fitnesstracker.training.internal;
 
 import org.springframework.stereotype.Component;
+import pl.wsb.fitnesstracker.training.api.CreateTrainingRequest;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
 import pl.wsb.fitnesstracker.user.api.User;
@@ -11,7 +12,6 @@ class TrainingMapper {
 
     TrainingDto toDto(Training training) {
         return new TrainingDto(training.getId(),
-                training.getUser().getId(),
                 new UserDto(
                         training.getUser().getId(),
                         training.getUser().getFirstName(),
@@ -27,7 +27,6 @@ class TrainingMapper {
 
     TrainingDto toDto(CreateTrainingRequest training) {
         return new TrainingDto(null,
-                training.userId(),
                 new UserDto(
                         training.userId(),
                         null,

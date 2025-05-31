@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public record TrainingDto(@Nullable Long id,
-                          @Nullable Long userId,
                           UserDto user,
                           Date startTime,
                           Date endTime,
