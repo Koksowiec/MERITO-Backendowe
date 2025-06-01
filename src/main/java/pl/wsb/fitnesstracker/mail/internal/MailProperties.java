@@ -1,7 +1,7 @@
 package pl.wsb.fitnesstracker.mail.internal;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.mail.javamail.JavaMailSender;
 import pl.wsb.fitnesstracker.mail.api.EmailSender;
@@ -9,45 +9,28 @@ import pl.wsb.fitnesstracker.mail.api.EmailSender;
 /**
  * Configuration of the {@link EmailSender} (additional to the Spring mail configuration for {@link JavaMailSender} bean autoconfiguration).
  */
-@ConfigurationProperties(prefix = "mail")
+@ConfigurationProperties(prefix = "spring.mail")
 @Getter
-@RequiredArgsConstructor
+@Setter
 class MailProperties {
 
     /**
-     * Email address that the email should be sent from.
+     * Host that email uses.
      */
-    private final String from;
-
-    // TODO
     private String host;
 
-    // TODO
+    /**
+     * Port that email uses.
+     */
     private int port;
 
-    // TODO
+    /**
+     * Username to log in to the email.
+     */
     private String username;
 
-    // TODO
+    /**
+     * Password to log in to the email.
+     */
     private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public String getFrom() {
-        return from;
-    }
 }

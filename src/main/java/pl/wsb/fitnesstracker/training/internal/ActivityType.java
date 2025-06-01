@@ -1,6 +1,8 @@
 package pl.wsb.fitnesstracker.training.internal;
 
-// TODO : JavaDoc
+/**
+ * Enum containing all different activity types that training can have.
+ */
 public enum ActivityType {
 
     RUNNING("Running"),

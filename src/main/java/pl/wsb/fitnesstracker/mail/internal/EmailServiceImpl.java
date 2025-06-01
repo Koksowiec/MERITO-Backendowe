@@ -25,15 +25,4 @@ public class EmailServiceImpl{
 
         emailSender.send(message);
     }
-
-    /* TODO: Kopiuj wklej do kontrolera aby wysyłać maile
-    private final EmailServiceImpl emailService;
-
-    @GetMapping("/email/send")
-    public String sentEmailTest(){
-        emailService.sendSimpleMessage("szczepanskikrzysiu@hotmail.com", "Test", "Test");
-
-        return "Email have been sent!";
-    }
-    */
 }

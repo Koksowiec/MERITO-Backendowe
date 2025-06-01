@@ -49,4 +49,18 @@ public class TrainingServiceImpl implements TrainingProvider {
         return trainingRepository.save(training);
     }
 
+    @Override
+    public Optional<Training> updateTraining(final Training training)
+    {
+        Training trainingToUpdate = trainingRepository.getById(training.getId());
+
+        trainingToUpdate.setDistance(training.getDistance());
+        trainingToUpdate.setUser(training.getUser());
+        trainingToUpdate.setActivityType(training.getActivityType());
+        trainingToUpdate.setEndTime(training.getEndTime());
+        trainingToUpdate.setStartTime(training.getStartTime());
+        trainingToUpdate.setAverageSpeed(training.getAverageSpeed());
+
+        return Optional.of(trainingRepository.save(trainingToUpdate));
+    }
 }

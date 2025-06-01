@@ -2,6 +2,9 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.time.LocalDate;
